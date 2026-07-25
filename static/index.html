@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hackathon Registration - Spheronix Technology</title>
+    <link rel="stylesheet" href="css/style.css?v=20260310-1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+
+<body>
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <img src="images/COMPANY LOGO.jpeg" alt="Logo" style="height: 40px; border-radius: 8px;">
+        </div>
+        <div class="nav-links">
+            <a href="new_landing.html" id="nav-home" class="active">Home</a>
+            <a href="how-to-register.html">How to Register</a>
+            <a href="terms-and-conditions.html" id="nav-instructions">Instructions</a>
+            <a href="new_landing.html">Go Back</a>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- View 1: Landing Page -->
+        <section id="landing-view" class="view active">
+            <div class="landing-content">
+                <h1>Welcome to <span class="highlight">Spheronix Technology Pvt. Ltd.</span></h1>
+                <p class="subtitle">Join our premier hackathon event and showcase your innovation!</p>
+                <div class="cta-buttons">
+                    <button id="btn-start-register" class="btn btn-primary btn-large">
+                        <i class="fas fa-user-plus"></i> Register Now
+                    </button>
+                    <button id="btn-instructions" class="btn btn-secondary btn-large">
+                        <i class="fas fa-book-open"></i> Instructions
+                    </button>
+                </div>
+                <div class="event-info">
+                    <div class="info-item">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Registration Open</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-users"></i>
+                        <span>Individual & Teams</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-gift"></i>
+                        <span>Exciting Prizes</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- View 2: Registration Steps -->
+        <section id="register-view" class="view hidden">
+            <div class="card card-large">
+                <button class="back-btn" id="btn-back-landing">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+
+                <div class="progress-bar">
+                    <div class="step active" id="step-indicator-1">
+                        <div class="circle">1</div>
+                        <span>Auth</span>
+                    </div>
+                    <div class="line" id="progress-line-1"></div>
+                    <div class="step" id="step-indicator-2">
+                        <div class="circle">2</div>
+                        <span>Details</span>
+                    </div>
+                    <div class="line" id="progress-line-2"></div>
+                    <div class="step" id="step-indicator-3">
+                        <div class="circle">3</div>
+                        <span>Team</span>
+                    </div>
+                    <div class="line" id="progress-line-3"></div>
+                    <div class="step" id="step-indicator-4">
+                        <div class="circle">4</div>
+                        <span>Payment</span>
+                    </div>
+                </div>
+
+                <!-- Step 1: Google Auth -->
+                <div id="step-1" class="step-content active-step">
+                    <div class="step-header">
+                        <h2><i class="fas fa-shield-alt"></i> Secure Authentication</h2>
+                        <p>Sign in with your Google account to continue registration.</p>
+                    </div>
+
+                    <div class="auth-box">
+                        <button id="btn-google-auth" class="btn btn-google">
+                            <i class="fab fa-google"></i> Continue with Google
+                        </button>
+                        <p class="auth-note"><i class="fas fa-lock"></i> Your data is secure with OAuth 2.0</p>
+                    </div>
+
+                    <div id="auth-error" class="error-message hidden">
+                        <i class="fas fa-exclamation-circle"></i> <span id="auth-error-text">Authentication failed.
+                            Please try again.</span>
+                    </div>
+
+                    <div id="already-registered" class="warning-message hidden">
+                        <i class="fas fa-info-circle"></i> You have already registered for this hackathon!
+                    </div>
+                </div>
+
+                <!-- Step 2: Student Details Form -->
+                <div id="step-2" class="step-content hidden-step">
+                    <div class="step-header">
+                        <h2><i class="fas fa-user-edit"></i> Your Details</h2>
+                        <p>Fill in your information to complete registration.</p>
+                    </div>
+
+                    <form id="registration-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="registrationDate">Registration Date</label>
+                                <input type="text" id="registrationDate" name="registrationDate" readonly
+                                    class="readonly-input">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="fullName">Full Name *</label>
+                                <input type="text" id="fullName" name="fullName" required minlength="2"
+                                    placeholder="Enter your full name">
+                                <small class="error-text" id="error-fullName"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address <span
+                                        class="badge badge-success">Verified</span></label>
+                                <input type="email" id="email" name="email" readonly class="readonly-input">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="mobile">Mobile Number *</label>
+                                <input type="tel" id="mobile" name="mobile" required placeholder="10-digit number"
+                                    maxlength="10">
+                                <small class="error-text" id="error-mobile"></small>
+                            </div>
+                            <div class="form-group">
+                                <label for="branch">Branch / Department *</label>
+                                <select id="branch" name="branch" required>
+                                    <option value="" disabled selected>Select Branch</option>
+                                </select>
+                                <small class="error-text" id="error-branch"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="collegeName">College Name *</label>
+                                <div class="college-selector" id="college-selector">
+                                    <input type="text" id="collegeSearch" autocomplete="off"
+                                        placeholder="Search your college name" aria-label="Search college">
+                                    <div id="college-dropdown" class="college-dropdown hidden" role="listbox"
+                                        aria-label="College options"></div>
+                                </div>
+                                <select id="collegeName" name="collegeName" required class="hidden-select" tabindex="-1"
+                                    aria-hidden="true">
+                                    <option value="" disabled selected>Select College</option>
+                                </select>
+                                <small class="error-text" id="error-collegeName"></small>
+                                <small class="helper-text" id="college-loading" style="display: none;"><i
+                                        class="fas fa-spinner fa-spin"></i> Loading colleges...</small>
+                                <div id="other-college-wrapper" class="hidden">
+                                    <input type="text" id="otherCollegeName" name="otherCollegeName" minlength="2"
+                                        placeholder="Enter college name in lowercase">
+                                    <small class="helper-text">Only lowercase letters are allowed for manual college
+                                        entries.</small>
+                                    <small class="error-text" id="error-otherCollegeName"></small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="city">City *</label>
+                                <input type="text" id="city" name="city" required minlength="2" placeholder="Enter your city">
+                                <small class="error-text" id="error-city"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="rollNumber">Roll Number *</label>
+                                <input type="text" id="rollNumber" name="rollNumber" required minlength="2"
+                                    placeholder="Enter your roll number">
+                                <small class="error-text" id="error-rollNumber"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="projectSelected">Select Project/Task *</label>
+                            <select id="projectSelected" name="projectSelected" required>
+                                <option value="" disabled selected>Choose a task category</option>
+                            </select>
+                            <small class="error-text" id="error-projectSelected"></small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Participation Mode *</label>
+                            <div class="participation-options">
+                                <label class="radio-card">
+                                    <input type="radio" name="participationMode" value="individual" required>
+                                    <div class="radio-content">
+                                        <i class="fas fa-user"></i>
+                                        <span>Individual</span>
+                                        <small>Participate alone</small>
+                                    </div>
+                                </label>
+                                <label class="radio-card">
+                                    <input type="radio" name="participationMode" value="team">
+                                    <div class="radio-content">
+                                        <i class="fas fa-users"></i>
+                                        <span>Team</span>
+                                        <small>Up to 5 members</small>
+                                    </div>
+                                </label>
+                            </div>
+                            <small class="error-text" id="error-participationMode"></small>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block" id="btn-next-step">
+                            Continue <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Step 3: Team Details (if team selected) -->
+                <div id="step-3" class="step-content hidden-step">
+                    <div class="step-header">
+                        <h2><i class="fas fa-users"></i> Team Details</h2>
+                        <p>Add your team members (up to 4 additional members). College, Branch, and Task will be
+                            inherited from Team Leader.</p>
+                    </div>
+
+                    <div class="team-info">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="teamName">Team Name *</label>
+                                <input type="text" id="teamName" name="teamName" required minlength="2"
+                                    placeholder="Enter your team name">
+                                <small class="error-text" id="error-teamName"></small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="team-leader-info">
+                        <h4><i class="fas fa-crown"></i> Team Leader (You)</h4>
+                        <p id="leader-info"></p>
+                        <p id="leader-college-info" class="college-info-text"></p>
+                    </div>
+
+                    <div id="team-members-container">
+                        <h4><i class="fas fa-user-friends"></i> Team Members <small
+                                style="color: var(--text-muted);">(All members will use same College & Branch)</small>
+                        </h4>
+
+                        <!-- Member 1 -->
+                        <div class="team-member-card" id="member-1-card">
+                            <div class="member-header">
+                                <span>Member 1</span>
+                                <button type="button" class="btn-remove-member" data-member="1">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Full Name *</label>
+                                    <input type="text" id="member1-name" minlength="2" placeholder="Member name">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email *</label>
+                                    <input type="email" id="member1-email" placeholder="Member email">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Mobile *</label>
+                                    <input type="tel" id="member1-mobile" maxlength="10" placeholder="10-digit number">
+                                </div>
+                                <div class="form-group">
+                                    <label>Roll Number *</label>
+                                    <input type="text" id="member1-roll" minlength="2" placeholder="Roll number">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-secondary btn-block dashed-btn" id="btn-add-member">
+                        <i class="fas fa-plus"></i> Add Team Member
+                    </button>
+                    <p id="member-limit-msg" class="limit-msg hidden">Maximum team size reached (5 members including
+                        leader)</p>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" id="btn-back-step2">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button type="button" class="btn btn-primary" id="btn-next-payment">
+                            Proceed to Payment <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 4: Payment -->
+                <div id="step-4" class="step-content hidden-step">
+                    <div class="step-header">
+                        <h2><i class="fas fa-credit-card"></i> Payment</h2>
+                        <p>Complete your payment to finalize registration.</p>
+                    </div>
+
+                    <div class="terms-box" id="payment-terms-box">
+                        <p id="payment-terms-mode-text" style="margin: 0; color: var(--text-light); font-size: 0.9rem;">
+                        </p>
+                        <div id="terms-status-badge" class="terms-status pending">
+                            <i class="fas fa-clock"></i> Terms Not Accepted
+                        </div>
+                        <button type="button" class="btn btn-secondary" id="btn-open-terms">
+                            <i class="fas fa-file-contract"></i> Read Terms and Conditions
+                        </button>
+                        <label class="terms-check">
+                            <input type="checkbox" id="termsAccepted" disabled>
+                            <span>I have read and accepted the Terms and Conditions.</span>
+                        </label>
+                        <small class="error-text" id="error-termsAccepted"></small>
+                    </div>
+
+                    <div class="payment-summary">
+                        <div class="summary-card">
+                            <h3>Order Summary</h3>
+                            <div class="summary-row">
+                                <span>Participation Mode:</span>
+                                <span id="summary-mode" class="highlight-text">Individual</span>
+                            </div>
+                            <div class="summary-row hidden" id="summary-team-row">
+                                <span>Team Size:</span>
+                                <span id="summary-team-size">1</span>
+                            </div>
+                            <div class="summary-divider"></div>
+                            <div class="summary-row total">
+                                <span>Total Amount:</span>
+                                <span id="summary-amount">₹1800</span>
+                            </div>
+                        </div>
+
+                        <div class="payment-method">
+                            <button type="button" class="btn btn-success btn-block" id="btn-pay-now" disabled>
+                                Pay Now with Razorpay <i class="fas fa-lock"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="payment-success-msg" class="success-message hidden">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>Payment Successful!</h3>
+                        <p>Transaction ID: <span id="display-transaction-id"></span></p>
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-secondary" id="btn-back-step3">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
+                        <button type="submit" class="btn btn-primary hidden" id="btn-submit-final">
+                            Complete Registration <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Success State -->
+                <div id="success-view" class="step-content hidden-step">
+                    <div class="success-message">
+                        <div class="check-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+                        <h2>Registration Successful!</h2>
+                        <p>Your payment has been verified and your challenge has been assigned.</p>
+                        <div class="user-summary">
+                            <div class="summary-item">
+                                <span class="label">Registration ID:</span>
+                                <span class="value" id="summary-id"></span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="label">Participant ID:</span>
+                                <span class="value" id="summary-participant-id"></span>
+                            </div>
+                            <div class="summary-item hidden" id="summary-team-id-row">
+                                <span class="label">Team ID:</span>
+                                <span class="value" id="summary-team-id"></span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="label">Transaction ID:</span>
+                                <span class="value" id="summary-transaction-id"></span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="label">Name:</span>
+                                <span class="value" id="summary-name"></span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="label">Email:</span>
+                                <span class="value" id="summary-email"></span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="label">Project:</span>
+                                <span class="value" id="summary-project"></span>
+                            </div>
+                            <div id="team-members-summary" class="hidden"></div>
+                        </div>
+                        <div id="assigned-challenge-card" class="challenge-card hidden">
+                            <div class="challenge-card-header">
+                                <span class="challenge-eyebrow">Your Assigned Challenge</span>
+                            </div>
+                            <h3 id="assigned-challenge-title"></h3>
+                            <p id="assigned-challenge-description"></p>
+                        </div>
+                        <button id="btn-home" class="btn btn-primary">
+                            <i class="fas fa-home"></i> Back to Home
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- View 4: Instructions -->
+        <section id="instructions-view" class="view hidden">
+            <div class="card card-large">
+                <button class="back-btn" id="btn-back-instructions">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+
+                <div class="step-header">
+                    <h2><i class="fas fa-book-open"></i> Hackathon Participation Instructions</h2>
+                    <p>Please read the following guidelines carefully before participating.</p>
+                </div>
+
+                <div class="instructions-content" style="text-align: left; padding: 1rem 0;">
+                    <div class="instruction-section" style="margin-bottom: 1.5rem;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 0.75rem;">
+                            <i class="fas fa-clipboard-list"></i> Registration Guidelines
+                        </h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i>
+                                Complete the registration form with accurate and verifiable information.
+                            </li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i>
+                                Ensure all required fields marked with an asterisk (*) are populated.
+                            </li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i>
+                                Utilize a valid email address via Google OAuth for authentication and primary communication.
+                            </li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i>
+                                A payment confirmation and official receipt will be emailed upon successful registration.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-section" style="margin-bottom: 1.5rem;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 0.75rem;">
+                            <i class="fas fa-users"></i> Team Participation
+                        </h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i>
+                                For team participation, the designated Team Leader must initiate and complete the registration process.
+                            </li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i>
+                                Team size is strictly limited to 5 members (1 Team Leader and up to 4 additional members).
+                            </li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i>
+                                The Team Leader must provide the Full Name, Email, Mobile, and Roll Number for each member.
+                            </li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i>
+                                Institutional details (College and Branch) are inherited from the Team Leader and apply globally to the team.
+                            </li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i>
+                                Ensure your team name is unique and adheres to professional guidelines.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-section" style="margin-bottom: 1.5rem;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 0.75rem;">
+                            <i class="fas fa-project-diagram"></i> Project Submission
+                        </h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i>
+                                Submit your project before the deadline.
+                            </li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i>
+                                Ensure the project is original and developed within the hackathon period.
+                            </li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i>
+                                Follow all competition rules and submission guidelines.
+                            </li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i>
+                                Make sure your code is well-documented and clean.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-section" style="margin-bottom: 1.5rem;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 0.75rem;">
+                            <i class="fas fa-exclamation-triangle"></i> Important Rules
+                        </h3>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <i class="fas fa-exclamation-circle"
+                                    style="color: var(--warning); margin-right: 0.5rem;"></i>
+                                Plagiarism is strictly prohibited and will result in disqualification.
+                            </li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <i class="fas fa-exclamation-circle"
+                                    style="color: var(--warning); margin-right: 0.5rem;"></i>
+                                All participants must adhere to the code of conduct.
+                            </li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <i class="fas fa-exclamation-circle"
+                                    style="color: var(--warning); margin-right: 0.5rem;"></i>
+                                Late submissions will not be accepted.
+                            </li>
+                            <li style="padding: 0.5rem 0; border-bottom: 1px solid var(--border-color);">
+                                <i class="fas fa-exclamation-circle"
+                                    style="color: var(--warning); margin-right: 0.5rem;"></i>
+                                Decision of the judges will be final.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="instruction-section"
+                        style="background: var(--background-color); padding: 1.5rem; border-radius: 12px;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 0.75rem;">
+                            <i class="fas fa-headset"></i> Need Help?
+                        </h3>
+                        <p style="margin: 0; color: var(--text-light);">
+                            Contact the administrator for any technical issues or inquiries.<br>
+                            <strong>Email:</strong> spheronixhackathon@gmail.com<br>
+                            <strong>Website:</strong>spheronixtechnology.com
+                        </p>
+                    </div>
+                </div>
+
+                <button id="btn-start-from-instructions" class="btn btn-primary btn-block" style="margin-top: 1.5rem;">
+                    <i class="fas fa-user-plus"></i> Start Registration
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <p class="footer-note">© 2026 Spheronix Technology. All rights reserved.</p>
+            </div>
+            <div class="footer-links">
+                <a href="terms-and-conditions.html" class="footer-link">Terms & Conditions</a>
+                <a href="privacy-policy.html" class="footer-link">Privacy Policy</a>
+                <a href="refund-policy.html" class="footer-link">Refund Policy</a>
+                <a href="cancellation-policy.html" class="footer-link">Cancellation Policy</a>
+                <a href="contact.html" class="footer-link">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="terms-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <h3><i class="fas fa-file-contract"></i> Terms and Conditions</h3>
+            <div class="modal-body">
+                <p>1. Participants must provide authentic and verifiable registration details.</p>
+                <p>2. For team mode, the team size must consist of 2 to 5 members (including the Team Leader).</p>
+                <p>3. All code, designs, and project submissions must be original work created entirely during the official hackathon timeframe.</p>
+                <p>4. Registration is considered confirmed only upon successful verification of the participation payment.</p>
+                <p>5. The decisions made by the panel of judges and the organizing committee are final and binding.</p>
+                <p>6. To be eligible for a refund, cancellation requests must be submitted at least 1 day (24 hours) prior to the official commencement of the hackathon.</p>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" id="btn-terms-reject">Reject</button>
+                <button type="button" class="btn btn-primary" id="btn-terms-accept">Accept</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="live-update-toast" class="toast hidden">
+        <div class="toast-icon">
+            <i class="fas fa-bell"></i>
+        </div>
+        <div class="toast-content">
+            <h4 id="toast-title">Update Received</h4>
+            <p id="toast-message">Your registration has been updated by an admin.</p>
+        </div>
+        <button id="toast-close" class="toast-close"><i class="fas fa-times"></i></button>
+    </div>
+
+    <script src="js/script.js?v=20260310-1"></script>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+# Fix L-07: robots.txt to prevent search engines from indexing payment flows and API endpoints
+User-agent: *
+
+# Disallow API endpoints (no value in indexing)
+Disallow: /api/
+
+# Disallow registration flow pages
+Disallow: /index.html
+Disallow: /how-to-register.html
+Disallow: /problems.html
+
+# Disallow receipt downloads
+Disallow: /api/receipt/
+
+# Allow landing pages and public content
+Allow: /new_landing.html
+Allow: /contact.html
+Allow: /about.html
+
+Sitemap: https://hackathon.spheronixtechnology.com/sitemap.xml

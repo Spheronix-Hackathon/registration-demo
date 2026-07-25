@@ -1,0 +1,25 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.pytest_cache/
+.mypy_cache/
+
+venv/
+.venv/
+env/
+
+# Fix C-01: NEVER commit .env files — rotate credentials if already committed!
+# Run: git rm --cached .env  to stop tracking the .env file.
+.env
+.env.*
+*.env
+
+.DS_Store
+Thumbs.db
+
+*.log
+
+build/
+dist/

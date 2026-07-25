@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Step-by-Step Guide - Hackathon 2026</title>
+    <link rel="stylesheet" href="css/style.css?v=20260310-1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --step-bg: rgba(255, 255, 255, 0.9);
+            --step-border: rgba(255, 255, 255, 0.5);
+            --info-text: #4b5563;
+        }
+
+        .guide-section {
+            padding: 5rem 5%;
+            max-width: 1450px;
+            margin: 0 auto;
+        }
+
+        .guide-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .guide-header h1 {
+            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+            letter-spacing: -1.5px;
+        }
+
+        .guide-header p {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            max-width: 850px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+            margin-bottom: 6rem;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(15px);
+            padding: 0.7rem;
+            border-radius: 100px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+        }
+
+        .tab-btn {
+            padding: 1.1rem 3rem;
+            border-radius: 100px;
+            border: none;
+            background: transparent;
+            color: #4b5563;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .tab-btn i {
+            font-size: 1.3rem;
+            transition: 0.3s;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary-color);
+            background: rgba(79, 70, 229, 0.05);
+        }
+
+        .tab-btn.active {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 12px 30px rgba(79, 70, 229, 0.3);
+            transform: scale(1.05);
+        }
+
+        .step-card {
+            background: var(--step-bg);
+            backdrop-filter: blur(25px);
+            border-radius: 40px;
+            border: 1px solid var(--step-border);
+            padding: 4rem;
+            margin-bottom: 6rem;
+            display: grid;
+            grid-template-columns: 1fr 1.6fr;
+            gap: 5rem;
+            align-items: center;
+            transition: all 0.5s ease;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+            position: relative;
+        }
+
+        .step-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 70px rgba(79, 70, 229, 0.15);
+            border-color: rgba(79, 70, 229, 0.4);
+        }
+
+        .step-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.7rem 1.4rem;
+            background: rgba(79, 70, 229, 0.08);
+            color: var(--primary-color);
+            border-radius: 100px;
+            font-weight: 800;
+            font-size: 1rem;
+            margin-bottom: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid rgba(79, 70, 229, 0.1);
+        }
+
+        .step-badge span {
+            background: var(--primary-color);
+            color: white;
+            width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin-right: 14px;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+        }
+
+        .step-info h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1.8rem;
+            color: #111827;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+        }
+
+        .step-info p {
+            color: #4b5563;
+            line-height: 1.85;
+            margin-bottom: 2.5rem;
+            font-size: 1.2rem;
+        }
+
+        .step-image {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            border: 10px solid white;
+            transition: 0.5s;
+        }
+
+        .step-image img {
+            width: 100%;
+            display: block;
+            transition: transform 1s ease;
+        }
+
+        .step-card:hover .step-image img {
+            transform: scale(1.06);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: slideFadeIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        @keyframes slideFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .step-card {
+                grid-template-columns: 1fr;
+                padding: 3rem;
+                gap: 4rem;
+                text-align: center;
+            }
+
+            .step-badge {
+                justify-content: center;
+            }
+        }
+
+        /* Mobile View Fixes and Ratios */
+        @media (max-width: 768px) {
+            .guide-section {
+                padding: 3rem 4%;
+            }
+
+            .guide-header {
+                margin-bottom: 3.5rem;
+            }
+
+            .guide-header h1 {
+                font-size: 2.2rem;
+            }
+
+            .guide-header p {
+                font-size: 1.1rem;
+            }
+
+            .tab-buttons {
+                margin-bottom: 3.5rem;
+                padding: 0.5rem;
+                gap: 0.5rem;
+                border-radius: 50px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .tab-btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.95rem;
+                gap: 0.6rem;
+            }
+
+            .tab-btn i {
+                font-size: 1.1rem;
+            }
+
+            .step-card {
+                padding: 2rem;
+                margin-bottom: 4rem;
+                gap: 3rem;
+                border-radius: 30px;
+            }
+
+            .step-info h2 {
+                font-size: 1.8rem;
+                margin-bottom: 1.2rem;
+                letter-spacing: -0.3px;
+            }
+
+            .step-info p {
+                font-size: 1.05rem;
+                margin-bottom: 2rem;
+            }
+
+            .step-image {
+                border-radius: 16px;
+                border: 6px solid white;
+            }
+
+            .navbar {
+                flex-direction: column;
+                gap: 1.2rem;
+                padding: 1.5rem 1rem;
+                text-align: center;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+                width: 100%;
+            }
+
+            .nav-links a {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.85rem;
+                border-radius: 6px;
+            }
+        }
+
+        /* Phone Specific Adjustments */
+        @media (max-width: 480px) {
+            .guide-header h1 {
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+            }
+
+            .tab-btn {
+                padding: 0.7rem 1rem;
+                font-size: 0.85rem;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .tab-buttons {
+                border-radius: 20px;
+                padding: 0.5rem;
+                gap: 0.3rem;
+                width: 100%;
+            }
+
+            .step-card {
+                padding: 1.5rem;
+                border-radius: 20px;
+                margin-bottom: 3.5rem;
+            }
+
+            .step-badge {
+                font-size: 0.85rem;
+                padding: 0.5rem 1rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .step-badge span {
+                width: 26px;
+                height: 26px;
+                margin-right: 8px;
+            }
+
+            .step-info h2 {
+                font-size: 1.5rem;
+            }
+
+            .step-image {
+                border: 4px solid white;
+            }
+
+            .nav-links {
+                gap: 0.3rem;
+            }
+
+            .nav-links a {
+                padding: 0.3rem 0.5rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Original Utility classes kept for general use */
+        .w-25 {
+            width: 25% !important;
+        }
+
+        .w-50 {
+            width: 50% !important;
+        }
+
+        .w-75 {
+            width: 75% !important;
+        }
+
+        .w-100 {
+            width: 100% !important;
+        }
+
+        @media (max-width: 991px) {
+
+            .w-75,
+            .w-50 {
+                width: 100% !important;
+            }
+        }
+
+        @media (max-width: 599px) {
+
+            .w-25,
+            .w-50,
+            .w-75 {
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="images/COMPANY LOGO.jpeg" alt="Logo" style="height: 40px; border-radius: 8px;">
+        </div>
+        <div class="nav-links">
+            <a href="new_landing.html">Home</a>
+            <a href="how-to-register.html" class="active">Registration Guide</a>
+            <a href="terms-and-conditions.html">Terms & Conditions</a>
+            <a href="contact.html">Support</a>
+        </div>
+    </nav>
+
+    <main class="guide-section">
+        <div class="guide-header">
+            <h1>Registration Masterclass</h1>
+            <p>Every step visualized. Choose your path to excellence and follow our high-definition guide to secure your
+                entry.</p>
+        </div>
+
+        <div class="tab-buttons">
+            <button id="btn-individual-tab" class="tab-btn active" onclick="showTab('individual')">
+                <i class="fas fa-user-circle"></i> Individual Journey
+            </button>
+            <button id="btn-team-tab" class="tab-btn" onclick="showTab('team')">
+                <i class="fas fa-users-cog"></i> Team Collaboration
+            </button>
+        </div>
+
+        <!-- Individual Path: 10 Steps -->
+        <div id="individual-content" class="tab-content active">
+            <!-- 1 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>1</span> START</div>
+                    <h2>The Landing Page</h2>
+                    <p>Begin your journey at our main portal. Click the prominent <strong>"Register Now"</strong> button to initiate your individual registration flow.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/indv/1.jpeg" alt="Step 1">
+                </div>
+            </div>
+            <!-- 2 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>2</span> WELCOME</div>
+                    <h2>Registration Hub</h2>
+                    <p>Enter the specialized registration environment. Our interface is optimized for speed, clarity, and simplicity.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/indv/2.jpeg" alt="Step 2">
+                </div>
+            </div>
+            <!-- 3 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>3</span> AUTH</div>
+                    <h2>Google Integration</h2>
+                    <p>Verify your identity seamlessly via <strong>Google SSO</strong>. This fast and secure method ensures your profile is accurately linked to our systems.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/indv/3.jpeg" alt="Step 3">
+                </div>
+            </div>
+            <!-- 4 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>4</span> PROFILE</div>
+                    <h2>Enter Your Details</h2>
+                    <p>Provide your contact number, college, and academic branch. Ensure the <strong>"Individual"</strong> participation mode is selected.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/indv/4.jpeg" alt="Step 4">
+                </div>
+            </div>
+            <!-- 5 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>5</span> FEES</div>
+                    <h2>Review Fee Structure</h2>
+                    <p>Experience transparent pricing. Review your individual participation fee before proceeding to the checkout gateway.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/indv/5.jpeg" alt="Step 5">
+                </div>
+            </div>
+            <!-- 6 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>6</span> T&C</div>
+                    <h2>Terms & Conditions</h2>
+                    <p>Click "Read Terms and Conditions" to review our compliance roadmap. Accept the terms to unlock the payment engine.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/indv/6.jpeg" alt="Step 6">
+                </div>
+            </div>
+            <!-- 7 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>7</span> PAYMENT</div>
+                    <h2>Ready to Pay</h2>
+                    <p>Upon accepting the terms, the <strong>"Pay Now"</strong> button will become active, allowing you to proceed to the secure checkout.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/indv/7.jpeg" alt="Step 7">
+                </div>
+            </div>
+            <!-- 8 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>8</span> CHECKOUT</div>
+                    <h2>Payment Method</h2>
+                    <p>Complete your transaction securely using your preferred method—scan the QR code with any UPI app, or choose from UPI IDs, cards, net banking, or wallets.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/indv/8.jpeg" alt="Step 8">
+                </div>
+            </div>
+            <!-- 9 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>9</span> SUCCESSFUL</div>
+                    <h2>Payment Confirmed</h2>
+                    <p>Success! Your payment has been verified. Click <strong>"Complete Registration"</strong> to securely log your data into our database.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/indv/9.png" alt="Step 9">
+                </div>
+            </div>
+            <!-- 10 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>10</span> MISSION</div>
+                    <h2>Challenge Assigned</h2>
+                    <p>Final confirmation! View your unique Participant ID and assigned Challenge. You are now officially enrolled in the hackathon.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/indv/10.png" alt="Step 10">
+                </div>
+            </div>
+        </div>
+
+        <!-- Team Path: 11 Steps -->
+        <div id="team-content" class="tab-content">
+            <!-- 1 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>1</span> START</div>
+                    <h2>The Landing Page</h2>
+                    <p>Begin your journey at our main portal. Click the prominent <strong>"Register Now"</strong> button to initiate your team registration flow.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/indv/1.jpeg" alt="Step 1">
+                </div>
+            </div>
+            <!-- 2 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>2</span> WELCOME</div>
+                    <h2>Registration Hub</h2>
+                    <p>Enter the specialized registration environment. Our interface is optimized for speed, clarity, and simplicity.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/indv/2.jpeg" alt="Step 2">
+                </div>
+            </div>
+            <!-- 3 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>3</span> AUTH</div>
+                    <h2>Google Integration</h2>
+                    <p>Verify your identity seamlessly via <strong>Google SSO</strong>. This fast and secure method ensures your profile is accurately linked to our systems.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/indv/3.jpeg" alt="Step 3">
+                </div>
+            </div>
+            <!-- 4 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>4</span> TEAM MODE</div>
+                    <h2>Select "Team" Option</h2>
+                    <p>Crucial step: Switch the participation mode to <strong>"Team"</strong> to unlock the squad-building features.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/team/4.jpeg" alt="Team 4">
+                </div>
+            </div>
+            <!-- 5 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>5</span> REGISTRY</div>
+                    <h2>Define Your Squad and Add Members</h2>
+                    <p>Add up to 4 additional members. Enter their mobile and roll numbers. They will automatically inherit your designated college and branch.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/team/5.jpeg" alt="Team 5">
+                </div>
+            </div>
+            <!-- 6 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>6</span> ROSTER</div>
+                    <h2>Review Fee Structure</h2>
+                    <p>Experience transparent pricing. Review the individual participation fee before proceeding to the checkout gateway.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/team/6.jpeg" alt="Team 6">
+                </div>
+            </div>
+            <!-- 7 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>7</span> SUMMARY</div>
+                    <h2>Squad Fee Summary</h2>
+                    <p>Our system dynamically calculates the total fee for your entire team. Please review all details before making your final commitment.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/team/7.jpeg" alt="Team 7">
+                </div>
+            </div>
+            <!-- 8 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>8</span> ACCEPT</div>
+                    <h2>Confirm Team Rules</h2>
+                    <p>Accept the terms on behalf of the entire team. This ensures every member is compliant with the hackathon guidelines.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/team/8.jpeg" alt="Team 8">
+                </div>
+            </div>
+            <!-- 9 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>9</span> GATEWAY</div>
+                    <h2>Team Checkout</h2>
+                    <p>Proceed to payment via our secure gateway. One single transaction secures the spot for the entire group.</p>
+                    <h3>NOTE:</h3>
+                    <p>The registration fee is assessed per person.<br> Your team's total amount is calculated as:<br> Total Amount = Base Fee × Number of Members</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/team/9.jpeg" alt="Team 9">
+                </div>
+            </div>
+            <!-- 10 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>10</span> CONFIRMED</div>
+                    <h2>Payment Received</h2>
+                    <p>Payment successful! Your team's spot is officially reserved. Click <strong>"Complete Registration"</strong> to finalize.</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/team/10.png" alt="Team 10">
+                </div>
+            </div>
+            <!-- 11 -->
+            <div class="step-card">
+                <div class="step-info">
+                    <div class="step-badge"><span>11</span> VICTORY</div>
+                    <h2>Challenge Unlocked</h2>
+                    <p>Completion achieved! You have been assigned a <strong>Team ID</strong> and a dedicated project track. Time to innovate!</p>
+                </div>
+                <div class="step-image">
+                    <img src="images/how-to-register/team/11.png" alt="Team 11">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <p class="footer-note">Architecting the future through technology.</p>
+            </div>
+            <div class="footer-links">
+                <a href="terms-and-conditions.html">Terms & Conditions</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="refund-policy.html">Refund Policy</a>
+                <a href="cancellation-policy.html">Cancellation Policy</a>
+                <a href="contact.html">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function showTab(type) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+            document.getElementById(type + '-content').classList.add('active');
+
+            if (event && event.currentTarget) {
+                event.currentTarget.classList.add('active');
+            } else {
+                const bId = type === 'individual' ? 'btn-individual-tab' : 'btn-team-tab';
+                document.getElementById(bId).classList.add('active');
+            }
+            window.scrollTo({ top: document.querySelector('.tab-buttons').offsetTop - 20, behavior: 'smooth' });
+        }
+    </script>
+</body>
+
+</html>

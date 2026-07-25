@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Spheronix Hackathon</title>
+    <link rel="stylesheet" href="css/style.css?v=20260310-1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img src="images/COMPANY LOGO.jpeg" alt="Logo" style="height: 40px; border-radius: 8px;">
+        </div>
+        <div class="nav-links">
+            <a href="new_landing.html">Home</a>
+            <a href="how-to-register.html">How to Register</a>
+            <a href="contact.html" class="active">Contact Us</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <section class="view active">
+            <div class="card card-large">
+                <div class="step-header">
+                    <h2><i class="fas fa-address-book"></i> Contact Us</h2>
+                    <p>Reach out for help related to registration, payments, or event logistics.</p>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <p>spheronixhackathon@gmail.com</p>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <p>+91 95159 06062</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Address</label>
+                    <p>Spheronix Technology Pvt. Ltd.<br> 5th Floor, No 8 & 9, Shantipura Main Rd, Phase II,
+                        Electronic City, Bengaluru, Karnataka 560100</p>
+                </div>
+
+                <div class="step-header" style="margin-top: 2rem;">
+                    <h2><i class="fas fa-paper-plane"></i> Quick Contact Form</h2>
+                </div>
+
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="contactName">Name</label>
+                            <!-- Fix L-07: Added maxlength to match server-side validation -->
+                            <input id="contactName" type="text" placeholder="Your name" required maxlength="100">
+                        </div>
+                        <div class="form-group">
+                            <!-- Fix M-02: Removed Gmail-only restriction — any valid email accepted -->
+                            <label for="contactEmail">Email</label>
+                            <input id="contactEmail" type="email" placeholder="your@email.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMobile">Mobile Number</label>
+                        <input id="contactMobile" type="tel" placeholder="Enter your 10-digit mobile number" required
+                            pattern="[0-9]{10}" maxlength="10">
+                    </div>
+                    <div class="form-group">
+                        <label for="contactMessage">Message</label>
+                        <textarea id="contactMessage" rows="5" placeholder="How can we help?" required></textarea>
+                    </div>
+                    <div id="formStatus"
+                        style="margin-bottom: 1rem; padding: 0.8rem; border-radius: 8px; display: none;"></div>
+                    <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+                </form>
+                <script src="js/contact.js"></script>
+            </div>
+        </section>
+    </div>
+
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <div class="footer-left">
+                <p class="footer-note">© 2026 Spheronix Technology. All rights reserved.</p>
+            </div>
+            <div class="footer-links">
+                <a href="terms-and-conditions.html" class="footer-link">Terms & Conditions</a>
+                <a href="privacy-policy.html" class="footer-link">Privacy Policy</a>
+                <a href="refund-policy.html" class="footer-link">Refund Policy</a>
+                <a href="cancellation-policy.html" class="footer-link">Cancellation Policy</a>
+                <a href="contact.html" class="footer-link">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
