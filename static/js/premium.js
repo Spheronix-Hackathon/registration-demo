@@ -125,8 +125,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const prizeObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                animateValue("prize-min", 0, 500000, 1500);
-                animateValue("prize-max", 0, 5000000, 1500);
+                animateValue("prize-min", 0, 200000, 1500);
+                animateValue("prize-max", 0, 500000, 1500);
                 prizeObserver.unobserve(entry.target);
             }
         });
